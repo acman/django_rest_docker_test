@@ -7,7 +7,6 @@ services:
     build:
       context: ./web_api
       dockerfile: Dockerfile.dev
-    command: python src/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:

@@ -1,4 +1,3 @@
 Django
 djangorestframework
-psycopg2
-Unipath
+psycopg2-binary
