@@ -33,13 +33,13 @@ class OrderListSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-class OrderCreateUpdateSerializer(serializers.ModelSerializer):
+class OrderCreateUpdatePatchSerializer(serializers.ModelSerializer):
     products = OrderProductMembershipCreateUpdateSerializer(source='orderproductmembership_set',
                                                             many=True, read_only=True)
 
     class Meta:
         model = Order
-        fields = ('products', 'shipping_details')
+        fields = ('shipping_details', 'products')
         depth = 1
 
     def create(self, validated_data):

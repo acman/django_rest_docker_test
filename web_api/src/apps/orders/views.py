@@ -2,14 +2,39 @@ from rest_framework import viewsets
 
 from .models import Order
 from .permissions import AnonCreateAndRetrieveUpdateDeleteOwnerOrStaffOnly
-from .serializers import OrderListSerializer, OrderCreateUpdateSerializer
+from .serializers import OrderListSerializer, OrderCreateUpdatePatchSerializer
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    """
+        retrieve:
+            Return an order instance.
+
+        list:
+            Return all orders.
+            Can be filtered by created_date__range:
+                /orders/?created_date__range=[2018-06-03,2018-06-04]
+
+        create:
+            Create a new order.
+            Request example:
+                {"shipping_details": "shipping details", "products": [{"id": 2,"quantity": 3},{"id": 3,"quantity": 5},]}
+
+        delete:
+            Remove an existing order.
+
+        partial_update:
+            Update one or more fields on an existing order.
+
+        update:
+            Update an order.
+    """
+
     serializers = {
         'default': OrderListSerializer,
-        'create': OrderCreateUpdateSerializer,
-        'update': OrderCreateUpdateSerializer,
+        'create': OrderCreateUpdatePatchSerializer,
+        'update': OrderCreateUpdatePatchSerializer,
+        'patch': OrderCreateUpdatePatchSerializer,
     }
     permission_classes = (AnonCreateAndRetrieveUpdateDeleteOwnerOrStaffOnly, )
 
