@@ -140,3 +140,5 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'clients_auth.Client'
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
