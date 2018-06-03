@@ -13,7 +13,7 @@ shell:
 	docker-compose -f docker-compose-dev.yml run --rm web_api bash
 
 migrate:
-	docker-compose -f docker-compose-dev.yml run --rm web_api python src/manage.py migrate
+	docker-compose -f docker-compose-dev.yml run --rm web_api python manage.py migrate
 
 test:
-	docker-compose -f docker-compose-dev.yml run --rm web_api python src/manage.py test
+	docker-compose -f docker-compose-dev.yml run --rm web_api python manage.py test

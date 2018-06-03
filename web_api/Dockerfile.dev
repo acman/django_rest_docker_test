@@ -1,1 +1,17 @@
-FROM python:3.6-onbuild
+FROM python:3.6
+
+ENV APP_DIR=/usr/src/app
+
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
+
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /usr/src/app
+RUN groupadd --gid "1001" user \
+ && useradd --uid "1001" --gid "1001" --create-home --shell /bin/bash user
+
+RUN mkdir -p $APP_DIR && chown user $APP_DIR
+
+USER user
