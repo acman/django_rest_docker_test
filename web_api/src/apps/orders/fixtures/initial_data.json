@@ -1,0 +1,88 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "name": "product1",
+        "price": "1000.00"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "name": "product2",
+        "price": "300.00"
+    }
+},
+{
+    "model": "orders.orderproductmembership",
+    "pk": 1,
+    "fields": {
+        "product": 2,
+        "order": 1,
+        "quantity": 5
+    }
+},
+{
+    "model": "orders.orderproductmembership",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "order": 1,
+        "quantity": 3
+    }
+},
+{
+    "model": "orders.orderproductmembership",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "order": 2,
+        "quantity": 10
+    }
+},
+{
+    "model": "clients_auth.client",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$100000$bfv5LdyFDjtR$ClklZ17mL79WDV2bPJrSc5DAok15Q+H+tVSEjKjvrM0=",
+        "last_login": "2018-06-03T20:06:48.986Z",
+        "is_superuser": true,
+        "email": "admin@admin.com",
+        "first_name": "",
+        "last_name": "",
+        "phone": "",
+        "is_staff": true,
+        "is_active": true,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "orders.order",
+    "pk": 1,
+    "fields": {
+        "status": 1,
+        "client": 1,
+        "shipping_details": "order 1",
+        "created_date": "2018-06-03T20:08:32.671Z",
+        "shipment_date": null,
+        "close_date": null,
+        "total_price": "4500.00"
+    }
+},
+{
+    "model": "orders.order",
+    "pk": 2,
+    "fields": {
+        "status": 1,
+        "client": 1,
+        "shipping_details": "order 2",
+        "created_date": "2018-06-03T20:10:20.140Z",
+        "shipment_date": null,
+        "close_date": null,
+        "total_price": "10000.00"
+    }
+}
+]
