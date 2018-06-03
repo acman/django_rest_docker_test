@@ -1,5 +1,6 @@
-Django REST API + Docker test project
-=====================================
+# Django REST API + Docker test project
+
+Login/Pass: admin@admin.com/adminadmin1
 
 Run project:
 ```
@@ -22,3 +23,8 @@ Stop server:
 ```
 $ make stop
 ```
+
+## TODO
+
+1. Add tests.
+2. Add registration.
