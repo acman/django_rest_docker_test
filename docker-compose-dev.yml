@@ -10,7 +10,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - /etc/passwd:/etc/passwd:ro
-      - ./web_api/src:/usr/src/app
+      - ./web_api/src:/home/user/app
     ports:
       - "8000:8000"
     depends_on:
