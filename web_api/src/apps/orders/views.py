@@ -1,3 +1,5 @@
+import json
+
 from rest_framework import viewsets, serializers, status
 from rest_framework.response import Response
 
@@ -14,7 +16,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         list:
             Return all orders.
             Can be filtered by created_date__range:
-                /orders/?created_date__range=[2018-06-03,2018-06-04]
+                /orders/?created_date__range=["2018-06-03","2018-06-04"]
 
         create:
             Create a new order.
@@ -35,7 +37,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         'default': OrderListSerializer,
         'create': OrderCreateUpdatePatchSerializer,
         'update': OrderCreateUpdatePatchSerializer,
-        'patch': OrderCreateUpdatePatchSerializer,
+        'partial_update': OrderCreateUpdatePatchSerializer,
     }
     permission_classes = (AnonCreateAndRetrieveUpdateDeleteOwnerOrStaffOnly, )
 
@@ -47,8 +49,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         filters = {}
         created_date_range = self.request.GET.get('created_date__range')
         if created_date_range:
-            date_min, date_max = created_date_range.split(',')
-            filters['created_date__range'] = [date_min[1:], date_max[:-1]]
+            date_min, date_max = json.loads(created_date_range)
+            filters['created_date__range'] = [date_min, date_max]
 
         return filters
 
