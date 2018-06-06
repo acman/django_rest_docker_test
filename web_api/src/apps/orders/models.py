@@ -1,9 +1,13 @@
+import datetime
+
 from django.conf import settings
 from django.db import models
+from django.db.models import Sum, F, DecimalField
 from django.utils.translation import gettext_lazy as _
 
 
 class Order(models.Model):
+    SHIPMENT_PERIOD = 5
     NEW, IN_PROGRESS, SHIPPED, COMPLETED, CANCELLED = range(1, 6)
     STATUS_CHOICES = (
         (NEW, _('new')),
@@ -33,6 +37,24 @@ class Order(models.Model):
 
     def __str__(self):
         return f'{self.client} order #{self.pk}, status {self.status}'
+
+    def _set_shipment_date(self):
+        if self.pk is None:
+            self.shipment_date = datetime.datetime.utcnow() + datetime.timedelta(days=self.SHIPMENT_PERIOD)
+
+    def _calculate_total_price(self):
+        self.total_price = self.orderproductmembership_set.aggregate(
+            total=Sum(F('product__price') * F('quantity'), output_field=DecimalField()))['total']
+
+    def _close_order(self):
+        if self.status == self.COMPLETED:
+            self.close_date = datetime.datetime.utcnow()
+
+    def save(self, **kwargs):
+        self._set_shipment_date()
+        self._calculate_total_price()
+        self._close_order()
+        super().save()
 
 
 class OrderProductMembership(models.Model):
