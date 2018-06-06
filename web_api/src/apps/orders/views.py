@@ -18,7 +18,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         create:
             Create a new order.
             Request example:
-                {"shipping_details": "shipping details", "products": [{"id": 2,"quantity": 3},{"id": 3,"quantity": 5},]}
+                {"shipping_details": "shipping details", "products": [{"id": 1,"quantity": 3},{"id": 2,"quantity": 5}]}
 
         delete:
             Remove an existing order.
