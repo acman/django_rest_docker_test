@@ -47,10 +47,13 @@ class OrderCreateUpdatePatchSerializer(serializers.ModelSerializer):
         fields = ('status', 'total_price', 'shipping_details', 'products')
         depth = 1
 
-    def validate(self, obj):
+    def _validate_products(self):
         products = self.initial_data.get('products')
         if not products:
             raise serializers.ValidationError('Products must be set.')
+
+    def validate(self, obj):
+        self._validate_products()
         return super().validate(obj)
 
     def create(self, validated_data):
